@@ -19,11 +19,11 @@ The problem is the EnsureDeleted/EnsureCreated calls take a **LONG** time. This 
 *NOTE: Respawn is a [NuGet library](https://www.nuget.org/packages/Respawn/) that removes all the rows in all the tables in a database. Useful if you have already called `EnsureClean` on the database and just want to remove the rows.*
 
 ## Where did this come from?
-The idea and code came from the EF Core team. @ajcvickers described how they managed this issue and I have copied [with their knowledge]( https://github.com/dotnet/efcore/issues/19635#issuecomment-613276164) and built this feature for a Sql Server database provider.
+The idea and code came from the EF Core team. @ajcvickers described how they managed this issue and I have copied [with the knowledge of the EF Core team](https://github.com/dotnet/efcore/issues/19635#issuecomment-613276164) some of EF Core's internal classes and built this feature for a Sql Server database provider.
 
 ## How to use this feature
 1. Include the EfCore.TestSupportSchema NuGet package
-2. Replace any EnsureDeleted/EnsureCreated calls with `context.()`.
+2. Replace any EnsureDeleted/EnsureCreated calls with `context.EnsureClean()`.
 
 Here is an example of a unit test using EfCore.TestSupport's `CreateUniqueClassOptions` to give you a unique database name for the test class it is in.
 
@@ -42,6 +42,8 @@ public void TestExampleOk()
     }
 }
 ```
+
+*NOTE. This only works with Sql Server databases.*
 
 ## What does EnsureClean remove?
 
