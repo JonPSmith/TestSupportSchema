@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UnitTests\" />
+    <ProjectReference Include="..\TestSupportSchema\TestSupportSchema.csproj" />
   </ItemGroup>
 
 </Project>
