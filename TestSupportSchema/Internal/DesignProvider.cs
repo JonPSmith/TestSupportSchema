@@ -15,7 +15,7 @@ namespace TestSupportSchema.Internal
     /// <summary>
     /// This static class contains the methods to return a design-time service provider
     /// </summary>
-    public static class DesignProvider
+    internal static class DesignProvider
     {
         private const string SqlServerProviderName = "Microsoft.EntityFrameworkCore.SqlServer";
         private const string SqliteProviderName = "Microsoft.EntityFrameworkCore.Sqlite";

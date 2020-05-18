@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 
 namespace TestSupportSchema.Internal
 {
-    public abstract class RelationalDatabaseCleaner
+    internal abstract class RelationalDatabaseCleaner
     {
         protected abstract IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory);
 

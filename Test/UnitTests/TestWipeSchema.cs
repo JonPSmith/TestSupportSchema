@@ -4,14 +4,23 @@
 using Microsoft.EntityFrameworkCore;
 using Test.Database1;
 using Test.Database2;
+using TestSupport.EfHelpers;
 using TestSupport.Helpers;
 using TestSupportSchema;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Test.UnitTests
 {
     public class TestWipeSchema
     {
+        private readonly ITestOutputHelper _output;
+
+        public TestWipeSchema(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         [Fact]
         public void TestDatabase1SchemaChangeToDatabase2Ok()
         {
@@ -19,6 +28,7 @@ namespace Test.UnitTests
             var connectionString = this.GetUniqueDatabaseConnectionString();
             var builder1 = new DbContextOptionsBuilder<DbContext1>();
             using (var context = new DbContext1(builder1.UseSqlServer(connectionString).Options))
+            using (new TimeThings(_output, "EnsureDeleted/EnsureCreated"))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
@@ -27,7 +37,10 @@ namespace Test.UnitTests
             using (var context = new DbContext2(builder2.UseSqlServer(connectionString).Options))
             {
                 //ATTEMPT
-                context.EnsureClean();
+                using (new TimeThings(_output, "EnsureClean"))
+                {
+                    context.EnsureClean();
+                }
 
                 //VERIFY
                 context.Add(new TopClass2());

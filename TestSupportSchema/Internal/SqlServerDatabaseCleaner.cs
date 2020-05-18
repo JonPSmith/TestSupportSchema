@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace TestSupportSchema.Internal
 {
-    public class SqlServerDatabaseCleaner : RelationalDatabaseCleaner
+    internal class SqlServerDatabaseCleaner : RelationalDatabaseCleaner
     {
         private readonly DbContext _context;
         public SqlServerDatabaseCleaner(DbContext context)

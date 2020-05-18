@@ -9,6 +9,11 @@ namespace TestSupportSchema
 {
     public static class CleanDatabaseExtensions
     {
+        /// <summary>
+        /// Calling this will wipe the database schema down to nothing in the database and then calls
+        /// Database.EnsureCreated to create the correct database schema based on your EF Core Context
+        /// </summary>
+        /// <param name="context">The DbContext linked to the Sql Server database you want to clean</param>
         public static void EnsureClean(this DbContext context)
             => context.Database.CreateExecutionStrategy()
                 .Execute(context.Database, database => new SqlServerDatabaseCleaner(context).Clean(database));
