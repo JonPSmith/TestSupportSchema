@@ -3,7 +3,7 @@
 This is a TEMPERARY project *(it will move into EfCore.TestSupport when EF Core 5 is released)* to contain the method `EnsureClean` which wipes the database schema and replaces it with a database that matches the current DbContext's configuration.
 
 ## Why is this useful?
-When you are writing your unit tests you are likely to use the command `context.Database.EnsureCreated()`  to set up the database you use for unit testing. That works for Sqlite in-memory databases, but it you are using a real database, then you need to call below to make sure that the database schema is up to date
+When you are writing your unit tests you are likely to use the command `context.Database.EnsureCreated()`  to set up the database you use for unit testing. That works for Sqlite in-memory databases, but it you are using a real database, then you need to call below to make sure that the database schema is up to date when you change the DbContext configuration or classes.
 ```c#
 context.Database.EnsureDeleted();
 context.Database.EnsureCreated();
@@ -22,7 +22,7 @@ The problem is the EnsureDeleted/EnsureCreated calls take a **LONG** time. This 
 The idea and code came from the EF Core team. @ajcvickers described how they managed this issue and I have copied [with the knowledge of the EF Core team](https://github.com/dotnet/efcore/issues/19635#issuecomment-613276164) some of EF Core's internal classes and built this feature for a Sql Server database provider.
 
 ## How to use this feature
-1. Include the EfCore.TestSupportSchema NuGet package
+1. Include the EfCore.TestSupportSchema [NuGet package](https://www.nuget.org/packages/EfCore.TestSupportSchema/).
 2. Replace any EnsureDeleted/EnsureCreated calls with `context.EnsureClean()`.
 
 Here is an example of a unit test using EfCore.TestSupport's `CreateUniqueClassOptions` to give you a unique database name for the test class it is in.
