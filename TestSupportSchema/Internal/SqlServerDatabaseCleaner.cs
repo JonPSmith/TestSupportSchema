@@ -1,11 +1,16 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Altered by Jon P Smith, GitHub @JonPSmith, https://www.thereformedprogrammer.net/
 
+using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+[assembly: InternalsVisibleTo("Test")]
 
 namespace TestSupportSchema.Internal
 {
@@ -16,7 +21,6 @@ namespace TestSupportSchema.Internal
         {
             _context = context;
         }
-
 
         //protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
         //    => new SqlServerDatabaseModelFactory(
@@ -31,7 +35,7 @@ namespace TestSupportSchema.Internal
         {
             var designTimeService = _context.GetDesignTimeService();
             var serviceProvider = designTimeService.GetDesignTimeProvider();
-            var factory = serviceProvider.GetService<IDatabaseModelFactory>();
+            return serviceProvider.GetService<IDatabaseModelFactory>();
         }
 
         protected override bool AcceptTable(DatabaseTable table) => !(table is DatabaseView);

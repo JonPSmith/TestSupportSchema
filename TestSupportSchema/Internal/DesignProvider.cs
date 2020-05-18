@@ -35,6 +35,7 @@ namespace TestSupportSchema.Internal
 
             if (providerName == SqlServerProviderName)
                 return new SqlServerDesignTimeServices();
+            //Only handles SQL Server
 
             throw new InvalidOperationException("This is not a database provider that we currently support.");
         }
