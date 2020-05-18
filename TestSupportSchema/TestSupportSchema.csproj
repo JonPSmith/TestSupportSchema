@@ -11,4 +11,26 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <PackageId>EfCore.TestSupportSchema</PackageId>
+    <PackageVersion>1.0.0-preview002</PackageVersion>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Authors>Jon P Smith</Authors>
+    <Description>Method that resets a database's schema to the current DbContext's configuration. See readme file on github.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>
+      Preview version for testing. This feature will be added to EfCore.TestSupport when that library is updated to EF Core 5. 
+    </PackageReleaseNotes>
+    <Copyright>Copyright (c) 2020 NET Core and Jon P Smith. Apache License, Version 2.0</Copyright>
+    <PackageTags>Entity Framework Core, xUnit</PackageTags>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/JonPSmith/TestSupportSchema</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/JonPSmith/EfCore.TestSupport/master/EfCoreTestSupportNuGetIcon128.png</PackageIconUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/JonPSmith/TestSupportSchema/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
 </Project>
