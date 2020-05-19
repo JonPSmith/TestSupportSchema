@@ -1,6 +1,8 @@
 # TestSupportSchema
 
-This is a TEMPERARY project *(it will move into EfCore.TestSupport when EF Core 5 is released)* to contain the method `EnsureClean` which wipes the database schema and replaces it with a database that matches the current DbContext's configuration.
+This is a TEMPORARY project *(it will move into EfCore.TestSupport when EF Core 5 is released)* to contain the method `EnsureClean` which wipes the database schema and replaces it with a database that matches the current DbContext's configuration. 
+
+You call this via `context.Database.EnsureClean()`.
 
 ## Why is this useful?
 When you are writing your unit tests you are likely to use the command `context.Database.EnsureCreated()`  to set up the database you use for unit testing. That works for Sqlite in-memory databases, but it you are using a real database, then you need to call below to make sure that the database schema is up to date when you change the DbContext configuration or classes.
@@ -23,7 +25,7 @@ The idea and code came from the EF Core team. @ajcvickers described how they man
 
 ## How to use this feature
 1. Include the EfCore.TestSupportSchema [NuGet package](https://www.nuget.org/packages/EfCore.TestSupportSchema/).
-2. Replace any EnsureDeleted/EnsureCreated calls with `context.EnsureClean()`.
+2. Replace any EnsureDeleted/EnsureCreated calls with `context.Database.EnsureClean()`.
 
 Here is an example of a unit test using EfCore.TestSupport's `CreateUniqueClassOptions` to give you a unique database name for the test class it is in.
 
@@ -35,7 +37,7 @@ public void TestExampleOk()
     var options = this.CreateUniqueClassOptions<YourDbContext>();
     using (var context = new YourDbContext(options))
     {
-        context.EnsureClean();
+        context.Database.EnsureClean();
 
         //... put your unit tests here
 

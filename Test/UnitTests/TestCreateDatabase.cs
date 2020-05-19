@@ -35,7 +35,7 @@ namespace Test.UnitTests
 
                 //ATTEMPT
                 showLog = true;
-                context.EnsureClean();
+                context.Database.EnsureClean();
                 showLog = false;
 
                 //VERIFY
@@ -60,7 +60,7 @@ namespace Test.UnitTests
 
                 //ATTEMPT
                 showLog = true;
-                context.EnsureClean();
+                context.Database.EnsureClean();
                 showLog = false;
 
                 //VERIFY

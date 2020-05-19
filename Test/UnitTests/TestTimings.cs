@@ -39,7 +39,7 @@ namespace Test.UnitTests
                 //ATTEMPT
                 using (new TimeThings(_output, "EnsureClean"))
                 {
-                    context.EnsureClean();
+                    context.Database.EnsureClean();
                 }
 
                 //VERIFY
@@ -53,7 +53,7 @@ namespace Test.UnitTests
                 {
                     var checkpoint = new Checkpoint();
                     await checkpoint.Reset(context.Database.GetDbConnection().ConnectionString);
-                    context.EnsureClean();
+                    context.Database.EnsureClean();
                 }
 
                 //VERIFY
@@ -64,7 +64,7 @@ namespace Test.UnitTests
                 //ATTEMPT
                 using (new TimeThings(_output, "EnsureClean"))
                 {
-                    context.EnsureClean();
+                    context.Database.EnsureClean();
                 }
 
                 //VERIFY
@@ -78,7 +78,7 @@ namespace Test.UnitTests
                 {
                     var checkpoint = new Checkpoint();
                     await checkpoint.Reset(context.Database.GetDbConnection().ConnectionString);
-                    context.EnsureClean();
+                    context.Database.EnsureClean();
                 }
 
                 //VERIFY

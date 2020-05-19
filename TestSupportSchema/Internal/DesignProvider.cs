@@ -21,19 +21,13 @@ namespace TestSupportSchema.Internal
         private const string SqliteProviderName = "Microsoft.EntityFrameworkCore.Sqlite";
 
         /// <summary>
-        /// This returns the correct instance of the design time service for the current DbContext
+        /// This returns the correct instance of the design time service for the current DbContext's Database property
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="databaseFacade"></param>
         /// <returns></returns>
-        public static IDesignTimeServices GetDesignTimeService(this DbContext context)
+        public static IDesignTimeServices GetDesignTimeService(this DatabaseFacade databaseFacade)
         {
-            var dbProvider = context.GetService<IDatabaseProvider>();
-            if (dbProvider == null)
-                throw new InvalidOperationException("Could not find a database provider service.");
-
-            var providerName = dbProvider.Name;
-
-            if (providerName == SqlServerProviderName)
+            if (databaseFacade.IsSqlServer())
                 return new SqlServerDesignTimeServices();
             //Only handles SQL Server
 

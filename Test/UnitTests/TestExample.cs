@@ -20,7 +20,7 @@ namespace Test.UnitTests
             var options = this.CreateUniqueClassOptions<DbContext1>();
             using (var context = new DbContext1(options))
             {
-                context.EnsureClean();
+                context.Database.EnsureClean();
 
                 //... put your unit tests here
 

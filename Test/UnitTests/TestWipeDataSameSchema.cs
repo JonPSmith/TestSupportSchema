@@ -28,7 +28,7 @@ namespace Test.UnitTests
                 context.Dependents.Count().ShouldEqual(1);
 
                 //ATTEMPT
-                context.EnsureClean();
+                context.Database.EnsureClean();
 
                 //VERIFY
                 context.TopClasses.Count().ShouldEqual(0);
@@ -50,7 +50,7 @@ namespace Test.UnitTests
                 context.Dependents.Count().ShouldEqual(1);
 
                 //ATTEMPT
-                context.EnsureClean();
+                context.Database.EnsureClean();
 
                 //VERIFY
                 context.TopClasses.Count().ShouldEqual(0);

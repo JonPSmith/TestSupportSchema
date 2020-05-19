@@ -39,7 +39,7 @@ namespace Test.UnitTests
                 //ATTEMPT
                 using (new TimeThings(_output, "EnsureClean"))
                 {
-                    context.EnsureClean();
+                    context.Database.EnsureClean();
                 }
 
                 //VERIFY

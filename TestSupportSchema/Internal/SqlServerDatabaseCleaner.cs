@@ -4,6 +4,7 @@
 
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
@@ -16,10 +17,10 @@ namespace TestSupportSchema.Internal
 {
     internal class SqlServerDatabaseCleaner : RelationalDatabaseCleaner
     {
-        private readonly DbContext _context;
-        public SqlServerDatabaseCleaner(DbContext context)
+        private readonly DatabaseFacade _databaseFacade;
+        public SqlServerDatabaseCleaner(DatabaseFacade databaseFacade)
         {
-            _context = context;
+            _databaseFacade = databaseFacade;
         }
 
         //protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
@@ -33,7 +34,7 @@ namespace TestSupportSchema.Internal
 
         protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
         {
-            var designTimeService = _context.GetDesignTimeService();
+            var designTimeService = _databaseFacade.GetDesignTimeService();
             var serviceProvider = designTimeService.GetDesignTimeProvider();
             return serviceProvider.GetService<IDatabaseModelFactory>();
         }
