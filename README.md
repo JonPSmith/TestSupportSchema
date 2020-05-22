@@ -49,4 +49,6 @@ public void TestExampleOk()
 
 ## What does EnsureClean remove?
 
-It is pretty comprehensive in what it removes. i.e. indexes, foreign key constraints, tables, sequences, views, functions, aggegates, procs, types, schema names. 
+It is pretty comprehensive in what it removes. i.e. indexes, foreign key constraints, tables, sequences, views, functions, aggegates, procs, types. 
+
+It doesn't delete schema names, but when setting up a new schema it checks if the schema name exists so it won't fail.
