@@ -51,4 +51,4 @@ public void TestExampleOk()
 
 It is pretty comprehensive in what it removes. i.e. indexes, foreign key constraints, tables, sequences, views, functions, aggegates, procs, types. 
 
-It doesn't delete schema names, but when setting up a new schema it checks if the schema name exists so it won't fail.
+It doesn't delete schema names, but when cleaning a database the create part checks if the schema name exists before it creates a new schema, so it won't fail.
