@@ -17,13 +17,14 @@ namespace TestSupportSchema
         /// NOTE: This only works for SQL Server
         /// </summary>>
         /// <param name="databaseFacade">The Database property of the current DbContext that you want to clean</param>
-        public static void EnsureClean(this DatabaseFacade databaseFacade)
+        /// <param name="setUpSchema">Optional: by default it will set the schema to match the current DbContext configuration. If false leaves the database empty</param>
+        public static void EnsureClean(this DatabaseFacade databaseFacade, bool setUpSchema = true)
         {
             if (!databaseFacade.IsSqlServer())
                 throw new InvalidOperationException("The EnsureClean method only works with ");
 
             databaseFacade.CreateExecutionStrategy()
-                .Execute(databaseFacade, database => new SqlServerDatabaseCleaner(databaseFacade).Clean(database));
+                .Execute(databaseFacade, database => new SqlServerDatabaseCleaner(databaseFacade).Clean(database, setUpSchema));
         }
     }
 }

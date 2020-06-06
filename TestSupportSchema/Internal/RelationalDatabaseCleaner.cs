@@ -37,7 +37,7 @@ namespace TestSupportSchema.Internal
 
         protected virtual void OpenConnection(IRelationalConnection connection) => connection.Open();
 
-        public virtual void Clean(DatabaseFacade facade)
+        public virtual void Clean(DatabaseFacade facade, bool setUpSchema)
         {
             var creator = facade.GetService<IRelationalDatabaseCreator>();
             var sqlGenerator = facade.GetService<IMigrationsSqlGenerator>();
@@ -46,7 +46,7 @@ namespace TestSupportSchema.Internal
             var sqlBuilder = facade.GetService<IRawSqlCommandBuilder>();
             var loggerFactory = facade.GetService<ILoggerFactory>();
 
-            if (!creator.Exists())
+            if (!creator.Exists() && setUpSchema)
             {
                 creator.Create();
             }
@@ -109,7 +109,8 @@ namespace TestSupportSchema.Internal
                 }
             }
 
-            creator.CreateTables();
+            if (setUpSchema)
+                creator.CreateTables();
         }
 
         private static void ExecuteScript(IRelationalConnection connection, IRawSqlCommandBuilder sqlBuilder, string customSql)

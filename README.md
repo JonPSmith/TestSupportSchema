@@ -10,6 +10,7 @@ When you are writing your unit tests you are likely to use the command `context.
 context.Database.EnsureDeleted();
 context.Database.EnsureCreated();
 ```
+
 The problem is the EnsureDeleted/EnsureCreated calls take a **LONG** time. This feature has the same effect (e.g. correct schema, empty of data) but is **MUCH** quicker e.g. for a very small database the timings are:
 
 | What                        | First use | Second use |
@@ -44,6 +45,8 @@ public void TestExampleOk()
     }
 }
 ```
+
+The `EnsureClean` method takes a optional boolean parameter. If set to false the method will NOT set up the tables in in the database. This is useful if you want to call context.Database.EnsureCreated() yourself.
 
 *NOTE. This only works with Sql Server databases.*
 
