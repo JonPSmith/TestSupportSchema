@@ -13,11 +13,14 @@ context.Database.EnsureCreated();
 
 The problem is the EnsureDeleted/EnsureCreated calls take a **LONG** time. This feature has the same effect (e.g. correct schema, empty of data) but is **MUCH** quicker e.g. for a very small database the timings are:
 
-| What                        | First use | Second use |
-|:----------------------------|----------:| ----------:|
-| EnsureDeleted/EnsureCreated | 10 secs.  | 10 secs.   |
-| EnsureClean                 | 300 ms    | 30 ms      |
-| Respawn (see note below)    | 170 ms    | 35 ms      |
+
+#### EF Core 5.0
+
+| What                        | First use  | Second use | NOTES |
+|:----------------------------|-----------:| ----------:|:-------
+| EnsureDeleted/EnsureCreated | 1.5 secs.  | 3 secs.    | EF Core 3.1 = 10 secs. |
+| EnsureClean                 | 400 ms     | 30 ms      | |
+| Respawn (see note below)    | 170 ms     | 35 ms      | |
 
 *NOTE: Respawn is a [NuGet library](https://www.nuget.org/packages/Respawn/) that removes all the rows in all the tables in a database. Useful if you have already called `EnsureClean` on the database and just want to remove the rows.*
 
